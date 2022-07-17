@@ -1,0 +1,17 @@
+
+
+
+
+.label {
+    -fx-font-size: 20px;
+    -fx-font-family: "Comic Sans MS";
+}
+
+.button {
+    -fx-border-insets: 5px;
+    -fx-border-color: #000000;
+    -fx-border-radius: 5px;
+    -fx-font-size: 12px;
+    -fx-font-family: "Comic Sans MS";
+    -fx-background-color: transparent;
+}
