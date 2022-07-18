@@ -1,13 +1,14 @@
 package org.SalarCo;
 
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
@@ -60,10 +61,39 @@ public class Checkers {
         availableMoves = new ArrayList<>();
     }
     public void reloadTable() {
+        gameState.endCreation();
         mainPane.getChildren().remove(stuff);
         availableMoves = new ArrayList<>();
         stuff = new Pane();
         moved = true;
+        if (gameState.getState() != States.Pending) {
+            Pane res = new Pane();
+            if (gameState.getState() == States.Win) {
+                Label label = new Label("BOT WON (GOOD BOT)");
+                label.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+                VBox vBox = new VBox(label);
+                vBox.setAlignment(Pos.CENTER);
+                vBox.setFillWidth(true);
+                HBox hBox = new HBox(vBox);
+                hBox.setFillHeight(true);
+                res.getChildren().add(hBox);
+                hBox.setAlignment(Pos.CENTER);
+                mainPane.getChildren().add(hBox);
+            }
+            else {
+                Label label = new Label("BOT LOST (BAD BOT)");
+                VBox vBox = new VBox(label);
+                vBox.setAlignment(Pos.CENTER);
+                vBox.setFillWidth(true);
+                HBox hBox = new HBox(vBox);
+                hBox.setFillHeight(true);
+                res.getChildren().add(hBox);
+                hBox.setAlignment(Pos.CENTER);
+                mainPane.getChildren().add(hBox);
+            }
+
+            return;
+        }
         if (gameState.jumped) {
             Button endTurn = new Button("End Turn");
             stuff.getChildren().add(endTurn);
